@@ -1,0 +1,24 @@
+[package]
+name = "ask"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A lightweight natural language shell command assistant CLI powered by AI Agents."
+repository = "https://github.com/your-username/ask"
+readme = "README.md"
+keywords = ["cli", "ai", "terminal", "agent", "shell"]
+categories = ["command-line-utilities", "development-tools"]
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+tokio = { version = "1.38", features = ["full"] }
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+colored = "2.1"
+inquire = "0.7"
+anyhow = "1.0"
+async-trait = "0.1"
+
+[dev-dependencies]
+tempfile = "3.10"
