@@ -2,6 +2,8 @@
 
 > Turn plain English/Traditional Chinese into exact, executable shell commands directly in your terminal. Zero local Rust toolchain required — powered by automated GitHub Actions cross-compilation.
 
+[ English ](README.md) | [ 繁體中文 ](README_zh-TW.md)
+
 ![Rust](https://img.shields.io/badge/Rust-2021-orange?style=for-the-badge&logo=rust)
 ![CI Build](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-blue?style=for-the-badge&logo=githubactions)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
