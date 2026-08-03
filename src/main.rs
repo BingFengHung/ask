@@ -1,6 +1,7 @@
 mod env_detector;
 mod executor;
 mod llm_provider;
+mod safety_auditor;
 mod ui;
 
 use anyhow::Result;
@@ -9,6 +10,7 @@ use colored::*;
 use env_detector::EnvironmentContext;
 use executor::execute_command;
 use llm_provider::query_best_available_provider;
+use safety_auditor::audit_command;
 use ui::{prompt_user_action, render_command_box, render_header, UserChoice};
 
 #[derive(Parser, Debug)]
@@ -55,30 +57,34 @@ async fn main() -> Result<()> {
         }
     };
 
-    // 3. Render UI
-    render_header(&query_str, provider_name, ctx.os.name(), ctx.shell.name());
-    render_command_box(&generated_cmd);
+    // 3. Safety Audit
+    let risk = audit_command(&generated_cmd);
 
-    // 4. Handle Execution or Dry-Run
+    // 4. Render UI
+    render_header(&query_str, provider_name, ctx.os.name(), ctx.shell.name());
+    render_command_box(&generated_cmd, &risk);
+
+    // 5. Handle Execution or Dry-Run
     if cli.dry_run {
         println!("{}", "ℹ️ Dry-run mode enabled. Command was not executed.".dimmed());
         return Ok(());
     }
 
-    if cli.auto_approve {
+    if cli.auto_approve && matches!(risk, safety_auditor::RiskLevel::Safe) {
         execute_command(&generated_cmd, &ctx)?;
         return Ok(());
     }
 
-    // 5. Interactive User Choice
-    match prompt_user_action(&generated_cmd)? {
+    // 6. Interactive User Choice
+    match prompt_user_action(&generated_cmd, &risk)? {
         UserChoice::Execute => {
             execute_command(&generated_cmd, &ctx)?;
         }
         UserChoice::Edit(edited_cmd) => {
+            let edited_risk = audit_command(&edited_cmd);
             println!();
             println!("{}", "Modified command:".bold().cyan());
-            render_command_box(&edited_cmd);
+            render_command_box(&edited_cmd, &edited_risk);
             execute_command(&edited_cmd, &ctx)?;
         }
         UserChoice::Cancel => {

@@ -112,7 +112,7 @@ Get-ChildItem -Path . -Filter *.pdf | Sort-Object Length -Descending
 
 ## 🛣️ Roadmap & Future Enhancements
 
-- [ ] **🛡️ Dangerous Command Guardrails**: Integrate a real-time risk auditor to flag destructive operations (e.g. `rm -rf`, `DROP DATABASE`, `format`) with high-contrast `[DANGER]` warnings and mandatory confirmation prompts.
+- [x] **🛡️ Dangerous Command Guardrails**: Integrated real-time risk auditor to flag destructive operations (e.g. `rm -rf`, `DROP DATABASE`, `format`) with high-contrast `[DANGER]` warnings and mandatory `YES` confirmation prompts.
 - [ ] **📖 `ask explain` Mode**: Add a command reverse-explanation feature (`ask explain "<command>"`) that dissects complex bash pipelines and PowerShell cmdlets into clear step-by-step breakdowns.
 - [ ] **🧠 Multi-Turn Session Memory**: Implement lightweight local state persistence (`~/.ask/session.json`) to support contextual follow-up queries (e.g., `ask "kill the process found in previous step"`).
 - [ ] **⚡ Shell Shortcut Integration (`ask install`)**: Auto-inject `??` / `q` shortcut aliases into `.zshrc`, `.bashrc`, and PowerShell `$PROFILE`.
