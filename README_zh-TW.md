@@ -110,6 +110,16 @@ Get-ChildItem -Path . -Filter *.pdf | Sort-Object Length -Descending
 
 ---
 
+## 🛣️ 未來開發規劃 (Roadmap)
+
+- [ ] **🛡️ 高風險指令資安防護 (Dangerous Command Guardrails)**：整合即時風險評估器，針對破壞性操作（如 `rm -rf`, `DROP DATABASE`, `format`）標示高亮 `[DANGER]` 警告並強制二次手動確認。
+- [ ] **📖 `ask explain` 反向指令解釋模式**：新增指令反向剖析功能（`ask explain "<指令>"`），將複雜的 Bash 管道與 PowerShell Cmdlet 拆解為易懂的步驟教學。
+- [ ] **🧠 上下文對話記憶 (Multi-Turn Session Memory)**：實作本機輕量狀態持久化 (`~/.ask/session.json`)，支援連貫語意追問（如 `ask "把它殺掉"` 或 `ask "將剛才的結果備份"`）。
+- [ ] **⚡ Shell 一鍵快捷鍵整合 (`ask install`)**：自動將 `??` 或 `q` 快捷別名寫入 `.zshrc`、`.bashrc` 與 PowerShell `$PROFILE` 檔案中。
+- [ ] **🔍 本機工具鏈動態感應**：啟動時自動掃描本機已安裝的 CLI 工具（`docker`, `git`, `ffmpeg`, `jq`），並注入 Prompt 確保 LLM 產出 100% 可執行的指令。
+
+---
+
 ## 📄 開源授權
 
 MIT License © 2026 BingFengHung
