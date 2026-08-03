@@ -5,7 +5,7 @@ pub enum RiskLevel {
 }
 
 pub fn audit_command(command: &str) -> RiskLevel {
-    let cmd_lower = command.to_lower_case();
+    let cmd_lower = command.to_lowercase();
 
     // 1. Recursive file deletion patterns
     if cmd_lower.contains("rm -rf")
